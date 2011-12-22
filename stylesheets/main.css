@@ -1,0 +1,19 @@
+
+body{
+  font-family: Verdana, Helvetica, sans-serif;
+  font-size: 10pt;
+  background-image: url(/background/family.jpg);
+  background-attachment : fixed;
+  background-repeat: no-repeat;
+  background-position: right bottom ; 
+}
+
+div#connect{
+	font-family: Arial;
+	font-size: 25pt;
+}
+
+div#book{
+	font-family: Georgia, Verdana, Arial;
+	font-size: 10pt;
+}
