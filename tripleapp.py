@@ -54,9 +54,34 @@ class Guestbook(webapp.RequestHandler):
         greeting.put()
         self.redirect('/familywall')
 
+class Message(webapp.RequestHandler):
+    def get(self):
+        greetings_query = Greeting.all().order('-date')
+        greetings = greetings_query.fetch(10)
+
+        if users.get_current_user():
+            url = users.create_logout_url(self.request.uri)
+            url_linktext = 'Log out'
+            user = users.get_current_user().nickname()
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Log in'
+            user = 'anonymous'
+
+        template_values = {
+            'greetings': greetings,
+            'url': url,
+            'url_linktext': url_linktext,
+            'user': user
+        }
+
+        path = os.path.join(os.path.dirname(__file__), 'message.html')
+        self.response.out.write(template.render(path, template_values))
+
 application = webapp.WSGIApplication([('/', MainPage),
                                       ('/familywall', FamilyWall),
-                                      ('/sign', Guestbook)],
+                                      ('/sign', Guestbook),
+                                      ('/message',Message)],
                                      debug=True)
 
 def main():
