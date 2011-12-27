@@ -6,6 +6,11 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext import db
 from google.appengine.ext.webapp import template
 
+class Family(db.Model):
+    name = db.StringProperty()
+    member_num = db.IntegerProperty()
+    created_at = db.DateTimeProperty(auto_now_add = True)
+
 class Greeting(db.Model):
     author = db.UserProperty()
     content = db.StringProperty(multiline=True)
@@ -53,6 +58,14 @@ class Guestbook(webapp.RequestHandler):
         greeting.content = self.request.get('content')
         greeting.put()
         self.redirect('/familywall')
+        
+class Registration(webapp.RequestHandler):
+    def get(self):
+        template_values = {
+        }
+
+        path = os.path.join(os.path.dirname(__file__), 'registration.html')
+        self.response.out.write(template.render(path, template_values))
 
 class Message(webapp.RequestHandler):
     def get(self):
@@ -92,6 +105,7 @@ class MSG(webapp.RequestHandler):
         self.redirect('/message')
 
 application = webapp.WSGIApplication([('/', MainPage),
+                                      ('/registration',Registration),
                                       ('/familywall', FamilyWall),
                                       ('/sign', Guestbook),
                                       ('/message',Message),
