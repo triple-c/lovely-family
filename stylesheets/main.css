@@ -3,10 +3,18 @@ body{
     width: 800px;
     font-family: Verdana, Helvetica, sans-serif;
     font-size: 10pt;
-    background-image: url(/background/family.jpg);
     background-attachment : fixed;
     background-repeat: no-repeat;
+}
+
+body#familywall{
+    background-image: url(/background/family.jpg);
     background-position: right bottom ; 
+}
+
+body#message{
+    background-image: url(/background/gbook.jpg);
+    background-position:50% 0%; 
 }
 
 div#connect{
