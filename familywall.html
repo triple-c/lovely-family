@@ -9,10 +9,10 @@
             Hello, {{ user }} !<br>
         </div>
         <a href="{{ url }}">{{ url_linktext }}</a>
-        
+        <a href="/message?r=xd">link</a>
         <form action="/sign" method="post">
-            <div>
-                <textarea name="content" rows="4" cols="50" style="background:transparent"></textarea>
+            <div id="textarea">
+                <textarea name="content"  style="background:transparent"></textarea>
             </div>
             <div>
                 <input type="submit" value="Post">

@@ -1,10 +1,12 @@
 body{
-  font-family: Verdana, Helvetica, sans-serif;
-  font-size: 10pt;
-  background-image: url(/background/family.jpg);
-  background-attachment : fixed;
-  background-repeat: no-repeat;
-  background-position: right bottom ; 
+    margin: 0 auto;
+    width: 800px;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 10pt;
+    background-image: url(/background/family.jpg);
+    background-attachment : fixed;
+    background-repeat: no-repeat;
+    background-position: right bottom ; 
 }
 
 div#connect{
@@ -14,5 +16,14 @@ div#connect{
 
 div#book{
 	font-family: Georgia, Verdana, Arial;
-	font-size: 10pt;
+	font-size: 12pt;
+}
+
+span.date{
+    margin-left: 430px;
+}
+
+div#textarea > textarea{
+    width: 800px;
+    height: 100px;
 }

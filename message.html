@@ -1,18 +1,27 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Message with "mr. x"</title>
+        <title>Message with {{r}}</title>
 		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css">
     </head>
     <body>
-        <a href="{{ url }}">{{ url_linktext }}</a>
-        <form action="/sign" method="post">
-            <div>
-                <textarea name="content" rows="4" cols="50" style="background:transparent"></textarea>
+        <form action="/signmsg" method="post">
+            <div id="textarea">
+                <textarea name="content"  style="background:transparent"></textarea>
             </div>
             <div>
                 <input type="submit" value="Post">
             </div>
-        </form>        
+        </form> 
+        
+        <div id="book">
+		    {% for greeting in greetings %}
+		        {% if greeting.author %}
+			        <b>{{ greeting.author.nickname }}</b> 說:      <span class="date">@{{greeting.date|date:"Y-m-d H:i"}}</span>
+		        {% endif %}
+		        <blockquote>{{ greeting.content|escape }}</blockquote>
+		    {% endfor %}
+	    </div>
+        
     </body>
 </html>

@@ -56,6 +56,7 @@ class Guestbook(webapp.RequestHandler):
 
 class Message(webapp.RequestHandler):
     def get(self):
+        r=self.request.get('r')
         greetings_query = Greeting.all().order('-date')
         greetings = greetings_query.fetch(10)
 
@@ -72,16 +73,29 @@ class Message(webapp.RequestHandler):
             'greetings': greetings,
             'url': url,
             'url_linktext': url_linktext,
-            'user': user
+            'user': user,
+            'r':r,
         }
 
         path = os.path.join(os.path.dirname(__file__), 'message.html')
         self.response.out.write(template.render(path, template_values))
 
+class MSG(webapp.RequestHandler):
+    def post(self):
+        greeting = Greeting()
+
+        if users.get_current_user():
+            greeting.author = users.get_current_user()
+
+        greeting.content = self.request.get('content')
+        greeting.put()
+        self.redirect('/message')
+
 application = webapp.WSGIApplication([('/', MainPage),
                                       ('/familywall', FamilyWall),
                                       ('/sign', Guestbook),
-                                      ('/message',Message)],
+                                      ('/message',Message),
+                                      ('/signmsg',MSG)],
                                      debug=True)
 
 def main():
