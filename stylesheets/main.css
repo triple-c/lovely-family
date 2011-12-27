@@ -1,37 +1,183 @@
-body{
-    margin: 0 auto;
-    width: 800px;
+/* ---------- main structure ---------- */
+
+body {
+    margin: 0;
+    background-attachment: fixed;
+    background-color: #f4f4f4;
+    background-repeat: no-repeat;
+    cursor: default;
     font-family: Verdana, Helvetica, sans-serif;
     font-size: 10pt;
-    background-attachment : fixed;
-    background-repeat: no-repeat;
 }
 
-body#familywall{
-    background-image: url(/background/family.jpg);
-    background-position: right bottom ; 
+div#wrapper {
+    margin: 0 auto;
+    width: 800px;
+    box-shadow: 0 4px 8px #888888;
+    -moz-box-shadow: 0 4px 8px #888888;
+    -o-box-shadow: 0 4px 8px #888888;
+    -webkit-box-shadow: 0 4px 8px #888888;
+    -ms-box-shadow: 0 4px 8px #888888;
+    background: #bbddbb;
 }
 
-body#message{
-    background-image: url(/background/gbook.jpg);
-    background-position:50% 0%; 
+div#header {
+    position: relative;
+    height: 64px;
 }
 
-div#connect{
+div#main {
+    min-height: 520px;
+}
+
+div#footer {
+    position: relative;
+    padding: 4px;
+    height: 32px;
+    border-top: 4px dashed #888888;
+    font-size: 16px;
+}
+
+
+
+
+
+/* ---------- body ---------- */
+
+body#familywall {
+    background-image: url('/background/family.jpg');
+    background-position: right bottom; 
+}
+
+body#message {
+    background-image: url('/background/gbook.jpg');
+    background-position: 50% 0%; 
+}
+
+a {
+    text-decoration: none;
+}
+
+
+
+
+
+/* ---------- header ---------- */
+
+div#header > h1 {
+    position: absolute;
+    top: 8px;
+    left: 240px;
+    margin: 0;
+    padding: 0;
+    font-size: 32px;
+}
+
+div#header > h2 {
+    position: absolute;
+    top: 40px;
+    left: 320px;
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+    color: #888888;
+}
+
+
+
+
+
+/* ---------- main ---------- */
+
+div#dashboard {
+    padding: 0 40px;
+}
+    /* ---------- dashboard ---------- */
+
+ul#switch_mode {
+    margin: 0;
+    padding: 8px 0;
+    height: 16px;
+    list-style-type: none;
+}
+
+ul#switch_mode > li {
+    padding: 8px;
+    display: inline;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -ms-border-radius: 4px;
+    background: #dddddd;
+}
+
+li.active {
+    border: 4px solid #bbbbbb;
+}
+
+li.inactive {
+    cursor: pointer;
+}
+
+li.inactive:hover {
+    color: #444444;
+}
+
+span#msg {
+    display: block;
+    height: 40px;
+    background: #bbbbbb;
+}
+
+
+
+
+
+    /* ---------- familywall ---------- */
+
+div#connect {
 	font-family: Arial;
 	font-size: 25pt;
 }
 
-div#book{
+div#book {
 	font-family: Georgia, Verdana, Arial;
 	font-size: 12pt;
 }
 
-span.date{
+span.date {
     margin-left: 430px;
 }
 
-div#textarea > textarea{
+div#textarea > textarea {
     width: 800px;
     height: 100px;
+}
+
+
+
+
+
+/* ---------- footer ----------- */
+
+div#footer > p {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    margin: 0;
+    color: #888888;
+}
+
+div#footer p > a {
+    color: #888888;
+}
+
+div#footer p > a:hover {
+    text-decoration: underline;
+}
+
+div#footer > img {
+    position: absolute;
+    right: 12px;
 }
