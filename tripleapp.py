@@ -6,6 +6,11 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext import db
 from google.appengine.ext.webapp import template
 
+class Family(db.Model):
+    name = db.StringProperty()
+    member_num = db.IntegerProperty()
+    created_at = db.DateTimeProperty(auto_now_add = True)
+
 class Greeting(db.Model):
     author = db.UserProperty()
     content = db.StringProperty(multiline=True)
