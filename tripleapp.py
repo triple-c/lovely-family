@@ -6,6 +6,11 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext import db
 from google.appengine.ext.webapp import template
 
+class Family(db.Model):
+    name = db.StringProperty()
+    member_num = db.IntegerProperty()
+    created_at = db.DateTimeProperty(auto_now_add = True)
+
 class Greeting(db.Model):
     author = db.UserProperty()
     content = db.StringProperty(multiline=True)
@@ -62,11 +67,35 @@ class Registration(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), 'registration.html')
         self.response.out.write(template.render(path, template_values))
 
+class Message(webapp.RequestHandler):
+    def get(self):
+        greetings_query = Greeting.all().order('-date')
+        greetings = greetings_query.fetch(10)
+
+        if users.get_current_user():
+            url = users.create_logout_url(self.request.uri)
+            url_linktext = 'Log out'
+            user = users.get_current_user().nickname()
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Log in'
+            user = 'anonymous'
+
+        template_values = {
+            'greetings': greetings,
+            'url': url,
+            'url_linktext': url_linktext,
+            'user': user
+        }
+
+        path = os.path.join(os.path.dirname(__file__), 'message.html')
+        self.response.out.write(template.render(path, template_values))
+
 application = webapp.WSGIApplication([('/', MainPage),
+                                      ('/registration',Registration),
                                       ('/familywall', FamilyWall),
                                       ('/sign', Guestbook),
-                                      ('/registration',Registration),
-                                      ],
+                                      ('/message',Message)],
                                      debug=True)
 
 def main():
