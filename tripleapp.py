@@ -53,10 +53,20 @@ class Guestbook(webapp.RequestHandler):
         greeting.content = self.request.get('content')
         greeting.put()
         self.redirect('/familywall')
+        
+class Registration(webapp.RequestHandler):
+    def get(self):
+        template_values = {
+        }
+
+        path = os.path.join(os.path.dirname(__file__), 'registration.html')
+        self.response.out.write(template.render(path, template_values))
 
 application = webapp.WSGIApplication([('/', MainPage),
                                       ('/familywall', FamilyWall),
-                                      ('/sign', Guestbook)],
+                                      ('/sign', Guestbook),
+                                      ('/registration',Registration),
+                                      ],
                                      debug=True)
 
 def main():
