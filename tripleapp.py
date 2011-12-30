@@ -17,7 +17,6 @@ class FamilyMember(db.Model):
     birthday = db.DateProperty()
     email = db.EmailProperty()
 
-
 class Greeting(db.Model):
     author = db.UserProperty()
     content = db.StringProperty(multiline=True)
@@ -80,7 +79,7 @@ class Registration(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), 'registration.html')
         self.response.out.write(template.render(path, template_values))
 
-class Guestbook(webapp.RequestHandler):
+class SaveRegistration(webapp.RequestHandler):
     def post(self):
         greeting = Greeting()
 
@@ -130,6 +129,7 @@ class MSG(webapp.RequestHandler):
 
 application = webapp.WSGIApplication([('/', MainPage),
                                       ('/registration',Registration),
+                                      ('/save_registration', SaveRegistration),
                                       ('/familywall', FamilyWall),
                                       ('/sign', Guestbook),
                                       ('/message',Message),
