@@ -10,5 +10,8 @@ handlers:
 - url: /background
   static_dir: background
 
+- url: /profilepicture
+  static_dir: profilepicture
+
 - url: /.*
   script: tripleapp.py

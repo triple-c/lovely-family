@@ -10,12 +10,6 @@ class Family(db.Model):
     name = db.StringProperty()
     member_num = db.IntegerProperty()
     created_at = db.DateTimeProperty(auto_now_add = True)
-    
-class FamilyMember(db.Model):
-    user = db.UserProperty()
-    gender = db.IntegerProperty()
-    birthday = db.DateProperty()
-    email = db.EmailProperty()
 
 class Greeting(db.Model):
     author = db.UserProperty()
@@ -32,8 +26,10 @@ class MainPage(webapp.RequestHandler):
     def get(self):
         template_values = {
         }
-
+        #if users.get_current_user():
         path = os.path.join(os.path.dirname(__file__), 'index.html')
+        #else:
+         #   path = os.path.join(os.path.dirname(__file__), 'demo_index.html')
         self.response.out.write(template.render(path, template_values))
 
 class FamilyWall(webapp.RequestHandler):
@@ -56,8 +52,10 @@ class FamilyWall(webapp.RequestHandler):
             'url_linktext': url_linktext,
             'user': user
         }
-
-        path = os.path.join(os.path.dirname(__file__), 'familywall.html')
+        #if users.get_current_user():
+            #path = os.path.join(os.path.dirname(__file__), 'familywall.html')
+        #else:
+        path = os.path.join(os.path.dirname(__file__), 'demo_familywall.html')
         self.response.out.write(template.render(path, template_values))
 
 class Guestbook(webapp.RequestHandler):
@@ -78,17 +76,6 @@ class Registration(webapp.RequestHandler):
 
         path = os.path.join(os.path.dirname(__file__), 'registration.html')
         self.response.out.write(template.render(path, template_values))
-
-class SaveRegistration(webapp.RequestHandler):
-    def post(self):
-        greeting = Greeting()
-
-        if users.get_current_user():
-            greeting.author = users.get_current_user()
-
-        greeting.content = self.request.get('content')
-        greeting.put()
-        self.redirect('/registration')
 
 class Message(webapp.RequestHandler):
     def get(self):
@@ -129,7 +116,6 @@ class MSG(webapp.RequestHandler):
 
 application = webapp.WSGIApplication([('/', MainPage),
                                       ('/registration',Registration),
-                                      ('/save_registration', SaveRegistration),
                                       ('/familywall', FamilyWall),
                                       ('/sign', Guestbook),
                                       ('/message',Message),
