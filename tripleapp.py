@@ -16,6 +16,12 @@ class Greeting(db.Model):
     content = db.StringProperty(multiline=True)
     date = db.DateTimeProperty(auto_now_add=True)
 
+class Communication(db.Model):
+    author = db.UserProperty()
+    receiver = db.UserProperty()
+    content = db.StringProperty(multiline=True)
+    date = db.DateTimeProperty(auto_now_add=True)
+
 class MainPage(webapp.RequestHandler):
     def get(self):
         template_values = {
@@ -95,13 +101,13 @@ class Message(webapp.RequestHandler):
 
 class MSG(webapp.RequestHandler):
     def post(self):
-        greeting = Greeting()
+        communication = Communication()
 
         if users.get_current_user():
-            greeting.author = users.get_current_user()
+            communication.author = users.get_current_user()
 
-        greeting.content = self.request.get('content')
-        greeting.put()
+        communication.content = self.request.get('content')
+        communication.put()
         self.redirect('/message')
 
 application = webapp.WSGIApplication([('/', MainPage),
