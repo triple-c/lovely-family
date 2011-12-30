@@ -10,6 +10,13 @@ class Family(db.Model):
     name = db.StringProperty()
     member_num = db.IntegerProperty()
     created_at = db.DateTimeProperty(auto_now_add = True)
+    
+class FamilyMember(db.Model):
+    user = db.UserProperty()
+    gender = db.IntegerProperty()
+    birthday = db.DateProperty()
+    email = db.EmailProperty()
+
 
 class Greeting(db.Model):
     author = db.UserProperty()
@@ -66,6 +73,17 @@ class Registration(webapp.RequestHandler):
 
         path = os.path.join(os.path.dirname(__file__), 'registration.html')
         self.response.out.write(template.render(path, template_values))
+
+class Guestbook(webapp.RequestHandler):
+    def post(self):
+        greeting = Greeting()
+
+        if users.get_current_user():
+            greeting.author = users.get_current_user()
+
+        greeting.content = self.request.get('content')
+        greeting.put()
+        self.redirect('/registration')
 
 class Message(webapp.RequestHandler):
     def get(self):
