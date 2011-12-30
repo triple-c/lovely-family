@@ -6,10 +6,24 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext import db
 from google.appengine.ext.webapp import template
 
+from datetime import datetime
+
 class Family(db.Model):
     name = db.StringProperty()
     member_num = db.IntegerProperty()
     created_at = db.DateTimeProperty(auto_now_add = True)
+    
+class FamilyMember(db.Model):
+    user = db.UserProperty()
+    nickname = db.StringProperty()
+    gender = db.IntegerProperty()
+    birthday = db.DateProperty()
+    email = db.EmailProperty()
+    created_at = db.DateTimeProperty(auto_now_add = True)
+    
+class Connection(db.Model):
+    user = db.StringProperty()
+    family_key = db.ReferenceProperty()
 
 class Greeting(db.Model):
     author = db.UserProperty()
@@ -24,7 +38,14 @@ class Communication(db.Model):
 
 class MainPage(webapp.RequestHandler):
     def get(self):
+        members_query = Greeting.all()
+        members = members_query.fetch(10)
+        user = users.get_current_user()
+        q = db.GqlQuery("SELECT * FROM Connection WHERE user = %s", user.user_id())
+        family = q.name
         template_values = {
+            'members':members,
+            'family':family
         }
         #if users.get_current_user():
         path = os.path.join(os.path.dirname(__file__), 'index.html')
@@ -76,6 +97,28 @@ class Registration(webapp.RequestHandler):
 
         path = os.path.join(os.path.dirname(__file__), 'registration.html')
         self.response.out.write(template.render(path, template_values))
+
+class SaveRegistration(webapp.RequestHandler):
+    def post(self):
+        family=Family()
+        familymember=FamilyMember()
+        family.name=self.request.get('familyname')
+        family.member_num=1
+        family.put()
+
+        if users.get_current_user():
+            familymember.user = users.get_current_user()
+
+        familymember.gender = int(self.request.get('gender'))
+        d = datetime.strptime(self.request.get('birthday'),'%Y-%m-%d').date()
+        familymember.birthday=d
+        familymember.nickname=self.request.get('nickname')
+        familymember.put()
+        connection=Connection()
+        connection.user=users.get_current_user().user_id()
+        connection.family_key=family.key()
+        connection.put()
+        self.redirect('/')
 
 class Message(webapp.RequestHandler):
     def get(self):

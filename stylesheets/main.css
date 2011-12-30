@@ -10,6 +10,10 @@ body {
     font-size: 10pt;
 }
 
+label{
+    white-space: pre;
+}
+
 div#wrapper {
     margin: 0 auto;
     width: 800px;

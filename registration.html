@@ -1,21 +1,31 @@
 <html>
+
+<head>
+     <meta charset="utf-8">
+     <title>registration</title>
+	<link type="text/css" rel="stylesheet" href="/stylesheets/main.css">
+</head>
+<body>
+<div id="wrapper">
+    <div id="main">
 <br>
 <br>
 <h1>創立一個家</h1>
 <br>
 <br>
 <h2>註冊:</h2>
-<body>
-<form>
-家庭名稱: <input type="text" name="familyname" /><br />
-顯示名稱: <input type="text" name="position" /><br />
-出生日期: <input type="text" name="birthday" /><br />
-Email: <input type="text" name="email" /><br />
-性別:<br />
-<input type="radio" name="sex" value="male" /> 男<br />
-<input type="radio" name="sex" value="female" /> 女<br />
+<form action="/save_registration" method="post">
+<label>家庭名稱: </label><input type="text" name="familyname" /><br />
+<label>顯示名稱: </label><input type="text" name="nickname" /><br />
+<label>出生日期: </label><input type="text" name="birthday" /><br />
+<label>電子信箱: </label><input type="text" name="email" /><br />
+<label>性別:      </label>
+<input type="radio" name="gender" value="1" /> 男
+<label>      </label><input type="radio" name="gender" value="2" /> 女<br />
 <input type="submit" value="創立">
 </form>
+</div>
+</div>
 </body>
 </html>
 
