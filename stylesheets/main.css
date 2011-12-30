@@ -23,11 +23,12 @@ div#wrapper {
 
 div#header {
     position: relative;
-    height: 64px;
+    height: 136px;
 }
 
 div#main {
-    min-height: 520px;
+    padding: 8px;
+    min-height: 480px;
 }
 
 div#footer {
@@ -44,10 +45,10 @@ div#footer {
 
 /* ---------- body ---------- */
 
-body#familywall {
+/*body#familywall {
     background-image: url('/background/family.jpg');
     background-position: right bottom; 
-}
+}*/
 
 body#message {
     background-image: url('/background/gbook.jpg');
@@ -81,6 +82,10 @@ div#header > h2 {
     padding: 0;
     font-size: 24px;
     color: #888888;
+}
+
+img#banner_img {
+    width: 800px;
 }
 
 
@@ -151,8 +156,39 @@ span.date {
 }
 
 div#textarea > textarea {
-    width: 800px;
-    height: 100px;
+    width: 784px;
+    height: 80px;
+    border-radius: 4px 4px 0 4px;
+    -moz-border-radius: 4px 4px 0 4px;
+    -o-border-radius: 4px 4px 0 4px;
+    -webkit-border-radius: 4px 4px 0 4px;
+    -ms-border-radius: 4px 4px 0 4px;
+    border: 4px solid #888888;
+    resize: none;
+    font-size: 16px;
+}
+
+input.post {
+    float: right;
+    margin: 0;
+    padding: 4px;
+    width: 80px;
+    border-radius: 0 0 4px 4px;
+    -moz-border-radius: 0 0 4px 4px;
+    -o-border-radius: 0 0 4px 4px;
+    -webkit-border-radius: 0 0 4px 4px;
+    -ms-border-radius: 0 0 4px 4px;
+    border: 0 solid #888888;
+    background: #888888;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+}
+
+input.post:hover {
+    color: #dd8888;
 }
 
 
