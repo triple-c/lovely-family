@@ -4,30 +4,36 @@
         <title>family wall</title>
 		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css">
 	</head>
-    <body>
-        <div id="connect">
-            Hello, {{ user }} !<br>
-        </div>
-        <a href="{{ url }}">{{ url_linktext }}</a>
-        
-        <form action="/sign" method="post">
-            <div>
-                <textarea name="content" rows="4" cols="50" style="background:transparent"></textarea>
+    <body id="familywall">
+        <div id="wrapper">
+            <div id="header">
+                <img id="banner_img" src="background/banner.png">
             </div>
-            <div>
-                <input type="submit" value="Post">
-            </div>
-        </form>
+            <div id="main">
+                <form action="/sign" method="post">
+                    <div id="textarea">
+                        <textarea name="content"></textarea>
+                    </div>
+                    <div>
+                        <input class="post" type="submit" value="Post">
+                    </div>
+                </form>
   
-	    <div id="book">
-		    {% for greeting in greetings %}
-		        {% if greeting.author %}
-			        <b>{{ greeting.author.nickname }}</b> wrote:
-		        {% else %}
-		            An anonymous person wrote:
-		        {% endif %}
-		        <blockquote>{{ greeting.content|escape }}</blockquote>
-		    {% endfor %}
-	    </div>
+	            <div id="book">
+		            {% for greeting in greetings %}
+		                {% if greeting.author %}
+			                <b>{{ greeting.author.nickname }}</b> wrote:
+		                {% else %}
+		                    An anonymous person wrote:
+		                {% endif %}
+		                <blockquote>{{ greeting.content|escape }}</blockquote>
+		            {% endfor %}
+                </div>
+            </div>
+            <div id="footer">
+                <p>&copy;<a href="http://triple-c.github.com/" target="_blank">triple c</a>. All rights reserved.</p><img src="http://code.google.com/appengine/images/appengine-noborder-120x30.gif" 
+                alt="Google 應用服務引擎技術提供" />
+            </div>
+        </div>
     </body>
 </html>

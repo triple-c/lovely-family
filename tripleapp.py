@@ -23,6 +23,12 @@ class Greeting(db.Model):
     content = db.StringProperty(multiline=True)
     date = db.DateTimeProperty(auto_now_add=True)
 
+class Communication(db.Model):
+    author = db.UserProperty()
+    receiver = db.UserProperty()
+    content = db.StringProperty(multiline=True)
+    date = db.DateTimeProperty(auto_now_add=True)
+
 class MainPage(webapp.RequestHandler):
     def get(self):
         template_values = {
@@ -87,6 +93,7 @@ class Guestbook(webapp.RequestHandler):
 
 class Message(webapp.RequestHandler):
     def get(self):
+        r=self.request.get('r')
         greetings_query = Greeting.all().order('-date')
         greetings = greetings_query.fetch(10)
 
@@ -103,17 +110,30 @@ class Message(webapp.RequestHandler):
             'greetings': greetings,
             'url': url,
             'url_linktext': url_linktext,
-            'user': user
+            'user': user,
+            'r':r,
         }
 
         path = os.path.join(os.path.dirname(__file__), 'message.html')
         self.response.out.write(template.render(path, template_values))
 
+class MSG(webapp.RequestHandler):
+    def post(self):
+        communication = Communication()
+
+        if users.get_current_user():
+            communication.author = users.get_current_user()
+
+        communication.content = self.request.get('content')
+        communication.put()
+        self.redirect('/message')
+
 application = webapp.WSGIApplication([('/', MainPage),
                                       ('/registration',Registration),
                                       ('/familywall', FamilyWall),
                                       ('/sign', Guestbook),
-                                      ('/message',Message)],
+                                      ('/message',Message),
+                                      ('/signmsg',MSG)],
                                      debug=True)
 
 def main():
