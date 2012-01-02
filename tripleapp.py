@@ -41,11 +41,11 @@ class MainPage(webapp.RequestHandler):
         members_query = Greeting.all()
         members = members_query.fetch(10)
         user = users.get_current_user()
-        q = db.GqlQuery("SELECT * FROM Connection WHERE user = %s", user.user_id())
-        family = q.name
+        #q = db.GqlQuery("SELECT * FROM Connection WHERE user = %s", user.user_id())
+        #family = q.name
         template_values = {
             'members':members,
-            'family':family
+            #'family':family
         }
         #if users.get_current_user():
         path = os.path.join(os.path.dirname(__file__), 'index.html')
@@ -142,8 +142,10 @@ class Message(webapp.RequestHandler):
             'user': user,
             'r':r,
         }
-
-        path = os.path.join(os.path.dirname(__file__), 'message.html')
+        #if users.get_current_user():
+            #path = os.path.join(os.path.dirname(__file__), 'message.html')
+        #else:
+        path = os.path.join(os.path.dirname(__file__), 'demo_message.html')
         self.response.out.write(template.render(path, template_values))
 
 class MSG(webapp.RequestHandler):
