@@ -9,6 +9,10 @@ body {
     font-family: Verdana, Helvetica, sans-serif;
     font-size: 10pt;
 }
+span.c{
+    color:red;
+    font-size: 20pt;
+}
 
 div#wrapper {
     margin: 0 auto;
