@@ -311,8 +311,10 @@ class Message(webapp.RequestHandler):
             'user': user,
             'r': r,
         }
-
-        path = os.path.join(os.path.dirname(__file__), 'message.html')
+        #if users.get_current_user():
+            #path = os.path.join(os.path.dirname(__file__), 'message.html')
+        #else:
+        path = os.path.join(os.path.dirname(__file__), 'demo_message.html')
         self.response.out.write(template.render(path, template_values))
 
 class Msg(webapp.RequestHandler):
