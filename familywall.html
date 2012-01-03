@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>family wall</title>
+        <title>{{ familyname }} family wall</title>
 		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css">
 	</head>
     <body id="familywall">
@@ -10,28 +10,29 @@
                 <!--<img id="banner_img" src="background/banner.png">-->
             </div>
             <div id="main">
-                <form action="/sign" method="post">
+                <h1>{{ familyname }}</h1>
+                <form action="/sign/{{ familyname }}" method="post">
                     <div id="textarea">
                         <textarea name="content"></textarea>
                     </div>
                     <div>
-                        <input class="post" type="submit" value="Post">
+                        <input class="post" type="submit" value="留言">
                     </div>
                 </form>
   
 	            <div id="book">
 		            {% for greeting in greetings %}
 		                {% if greeting.author %}
-			                <b>{{ greeting.author.nickname }}</b> wrote:
+			                <b>{{ greeting.author.nickname }}:</b>
 		                {% else %}
-		                    An anonymous person wrote:
+		                    An anonymous person:
 		                {% endif %}
 		                <blockquote>{{ greeting.content|escape }}</blockquote>
 		            {% endfor %}
                 </div>
             </div>
             <div id="footer">
-                <p>&copy;<a href="http://triple-c.github.com/" target="_blank">triple c</a>. All rights reserved.</p><img src="http://code.google.com/appengine/images/appengine-noborder-120x30.gif" 
+                <p>&copy;<a href="http://triple-c.github.com/" target="_blank">triple c</a>. All rights reserved. <a href="/about">about</a></p><img src="http://code.google.com/appengine/images/appengine-noborder-120x30.gif" 
                 alt="Google 應用服務引擎技術提供" />
             </div>
         </div>

@@ -10,10 +10,6 @@ body {
     font-size: 10pt;
 }
 
-label{
-    white-space: pre;
-}
-
 div#wrapper {
     margin: 0 auto;
     width: 800px;
@@ -31,6 +27,7 @@ div#header {
 }
 
 div#main {
+    position: relative;
     padding: 8px;
     min-height: 480px;
 }
@@ -61,6 +58,10 @@ body#message {
 
 a {
     text-decoration: none;
+}
+
+label {
+    white-space: pre;
 }
 
 
@@ -98,14 +99,51 @@ img#banner_img {
 
 /* ---------- main ---------- */
 
-div#dashboard {
-    padding: 0 40px;
+ul#nav {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
 }
+
+div#dashboard {
+    position: relative;
+    margin: 0 40px;
+}
+
+div#status_board {
+    margin: 0 24px;
+}
+
+    /* ---------- nav ---------- */
+
+ul#nav > li {
+    display: inline;
+}
+
+ul#nav li > a {
+    padding: 4px 8px;
+    background: white;
+    color: #444444;
+}
+
+ul#nav li > a:hover {
+    color: #888888;
+}
+
+
+
+
+
     /* ---------- dashboard ---------- */
 
 ul#switch_mode {
+    float: left;
     margin: 0;
     padding: 8px 0;
+    width: 128px;
     height: 16px;
     list-style-type: none;
 }
@@ -113,11 +151,11 @@ ul#switch_mode {
 ul#switch_mode > li {
     padding: 8px;
     display: inline;
-    border-radius: 4px;
-    -moz-border-radius: 4px;
-    -o-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -ms-border-radius: 4px;
+    border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    -o-border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    -ms-border-radius: 4px 4px 0 0;
     background: #dddddd;
 }
 
@@ -133,10 +171,122 @@ li.inactive:hover {
     color: #444444;
 }
 
-span#msg {
-    display: block;
-    height: 40px;
+ul#member_list {
+    margin: 0;
+    padding: 8px 0;
+    height: 16px;
+    list-style-type: none;
+}
+
+ul#member_list > li {
+    padding: 8px;
+    display: inline;
+    cursor: pointer;
+    font-size: 16px;
+    color: #55bb88;
+}
+
+div#msg_box {
+    padding: 4px;
+    min-height: 24px;
+    max-height: 64px; 
+    border-radius: 0 4px 4px 4px;
+    -moz-border-radius: 0 4px 4px 4px;
+    -o-border-radius: 0 4px 4px 4px;
+    -webkit-border-radius: 0 4px 4px 4px;
+    -ms-border-radius: 0 4px 4px 4px;
     background: #bbbbbb;
+    overflow: hidden;
+}
+
+.msg, textarea.talkto_msg {
+    font-size: 16px;
+}
+
+span.msg {
+    cursor: pointer;
+}
+
+textarea.msg, textarea.talkto_msg {
+    display: none;
+    width: 688px;
+    resize: none;
+}
+
+
+
+
+
+    /* ---------- status board ---------- */
+
+div#status_board > h2 {
+    margin: 0;
+    padding-bottom: 4px;
+    text-align: center;
+    font-size: 32px;
+    color: #dd8888;
+}
+
+div#status_board h2 > span {
+    padding: 0 40px;
+    min-width: 160px;
+    border-bottom: 4px solid #dd8888;
+}
+
+div#status_board h2 span > a {
+    color: #dd8888;
+}
+
+div#status_board h2 span > a:hover {
+    color: #ddbbbb;
+}
+
+div.member_status {
+    position: relative;
+    float: left;
+    margin: 16px;
+    padding: 8px;
+    width: 320px;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -ms-border-radius: 4px;
+    box-shadow: 0 0 8px #888888;
+    -moz-box-shadow: 0 0 8px #888888;
+    -o-box-shadow: 0 0 8px #888888;
+    -webkit-box-shadow: 0 0 8px #888888;
+    -ms-box-shadow: 0 0 8px #888888;
+    background: white;
+}
+
+span.nickname {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+span.updated_time {
+    position: absolute;
+    right: 8px;
+    color: #888888;
+}
+
+img.profile_image {
+    float: left;
+    width: 40px;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border: 4px solid #888888;
+}
+
+div.status {
+    margin-left: 56px;
+    width: 256px;
+    overflow: hidden;
+    font-size: 16px;
 }
 
 
@@ -220,6 +370,86 @@ span.time{
 blockquote.quote{
     margin: 10px 50px 0 150px;
 }
+
+
+
+
+
+    /* ---------- joining family & registration ---------- */
+
+h1#registration_heading, h1#joining_heading {
+    text-align: center;
+}
+
+form#registration_form, form#joining_form {
+    margin: 0 auto;
+    width: 400px;
+}
+
+fieldset.registration_fieldset, fieldset.joining_fieldset {
+    margin: 8px;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border: 4px solid #888888;
+}
+
+fieldset.registration_fieldset > legend, fieldset.joining_fieldset > legend {
+    font-size: 20px;
+    color: #444444;
+}
+
+fieldset.registration_fieldset > label, fieldset.joining_fieldset > label {
+    font-size: 16px;
+}
+
+fieldset.registration_fieldset > input, fieldset.joining_fieldset > input {
+    font-size: 16px;
+}
+
+fieldset.registration_fieldset > input[type="text"], fieldset.joining_fieldset > input[type="text"] {
+    width: 352px;
+}
+
+input#registration_submit, input#joining_submit {
+    position: absolute;
+    top: 240px;
+    left: 640px;
+    margin: 0;
+    padding: 8px;
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    -moz-border-radius: 40px;
+    -o-border-radius: 40px;
+    -webkit-border-radius: 40px;
+    -ms-border-radius: 40px;
+    box-shadow: 0 0 8px #888888;
+    -moz-box-shadow: 0 0 8px #888888;
+    -o-box-shadow: 0 0 8px #888888;
+    -webkit-box-shadow: 0 0 8px #888888;
+    -ms-box-shadow: 0 0 8px #888888;
+    border: 4px solid #dddddd;
+    background: #55bb88;
+    cursor: pointer;
+    font-size: 24px;
+    color: white;
+}
+
+input#registration_submit:hover, input#joining_submit:hover {
+    box-shadow: 0 0 4px #888888;
+    -moz-box-shadow: 0 0 4px #888888;
+    -o-box-shadow: 0 0 4px #888888;
+    -webkit-box-shadow: 0 0 4px #888888;
+    -ms-box-shadow: 0 0 4px #888888;
+    background: #bbddbb;
+    color: #888888;
+}
+
+
+
 
 
 /* ---------- footer ----------- */

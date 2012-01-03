@@ -6,27 +6,122 @@
         <link type="image/x-icon" href="images/black_hat.ico" rel="icon">
         <link type="text/css" href="stylesheets/main.css" rel="stylesheet">
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            var current_tab = 'mystatus';
+            var msg = '{{ selfstatus.content|escape }}';
+
+            $(function()
+            {
+                $('li.inactive').live('click', function()
+                {
+                    var last_tab = current_tab;
+                    current_tab = $(this).attr('id');
+                    if (current_tab == 'mystatus')
+                    {
+                        $('textarea.talkto_msg').hide();
+                        $('span.msg').show();
+                    }
+                    else if (current_tab == 'talkto')
+                    {
+                        $('div#msg_box > span').hide();
+                        $('div#msg_box > textarea').hide();
+                        $('textarea.talkto_msg').show();
+                    }
+                    $('#' + current_tab).attr('class', 'active');
+                    $('#' + last_tab).attr('class', 'inactive');
+                });
+
+                $('span.msg').click(function()
+                {
+                    $(this).hide();
+                    $('textarea.msg').show();
+                    $('textarea.msg').select();
+                });
+
+                $('textarea.msg').focusout(function()
+                {
+                    $('textarea.msg').hide();
+                    $('textarea.msg').val(msg);
+                    $('span.msg').show();
+                });
+
+                $('textarea.msg').keypress(function(e)
+                {
+                    if (e.keyCode == 13)
+                    {
+                        e.preventDefault();
+                        if ($('textarea.msg').val() != msg)
+                        {
+                            $.ajax({
+                                url: '/update_status',
+                                type: 'post',
+                                data: {status: $('textarea.msg').val()},
+                                error: function(xhr)
+                                {
+                                    alert('error');
+                                },
+                                success: function(response)
+                                {
+                                    msg = $('textarea.msg').val();
+                                    $('span.msg').html(msg);
+                                    $('div#selfstatus').html(msg);
+                                }
+                            });
+                        }
+                        $('textarea.msg').hide();
+                        $('span.msg').show();
+                    }
+                });
+            });
+        </script>
     </head>
     <body>
         <div id="wrapper">
             <div id="header">
-                <img id="banner_img" src="background/banner.png">
+                <img id="banner_img" src="http://i.minus.com/jbnOelc7SEoAbN.png">
             </div>
             <div id="main">
+                <ul id="nav">
+                    <li><a href="{{ url }}">{{ url_linktext }}</a></li>
+                    {% ifequal url_linktext 'Log in' %}
+                        <li><a href="register">Create family now!</a></li>
+                    {% endifequal %}
+                    <li><a href="/">Home</a></li>
+                </ul>
                 <div id="dashboard">
                     <ul id="switch_mode">
                         <li id="mystatus" class="active">我正在</li>
                         <li id="talkto" class="inactive">對誰說</li>
                     </ul>
-                    <span id="msg"></span>
-                    {% for member in members %}
-			             <b>{{ member.nickname }}</b>
-		            {% endfor %}
-                    {{family}}
+                    <ul id="member_list">
+                        {% for entry in member_status %}
+                            {% ifnotequal entry.user selfuser.nickname %}
+                                <li id="{{ entry.user_id }}">{{ entry.user }}</li>
+                            {% endifnotequal %}
+                        {% endfor %}
+                    </ul>
+                    <div id="msg_box">
+                        <span class="msg">{{ selfstatus.content|escape }}</span>
+                        <textarea class="msg">{{ selfstatus.content|escape }}</textarea>
+                        <textarea class="talkto_msg"></textarea>
+                    </div>
+                </div>
+                <div id="status_board">
+                    <h2><span><a href="/familywall/{{ family.name }}">{{ family.name }}</a></span></h2>
+                    {% for entry in member_status %}
+                        <div class="member_status">
+                            <span class="nickname">{{ entry.user }}</span><span class="updated_time">@{{ entry.updated_at|date:"H:i:s Y-m-d" }}</span><br>
+                            <img class="profile_image" src="profilepicture/wanwan.jpg">
+                            <div {% ifequal entry.user_id user_id %}id="selfstatus"{% endifequal %} class="status">
+                                {{ entry.content|escape }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <br style="clear: both;">
                 </div>
             </div>
             <div id="footer">
-                <p>&copy;<a href="http://triple-c.github.com/" target="_blank">triple c</a>. All rights reserved.</p><img src="http://code.google.com/appengine/images/appengine-noborder-120x30.gif" 
+                <p>&copy;<a href="http://triple-c.github.com/" target="_blank">triple c</a>. All rights reserved. <span id="about">about</span></p><img src="http://code.google.com/appengine/images/appengine-noborder-120x30.gif" 
                 alt="Google 應用服務引擎技術提供" />
             </div>
         </div>

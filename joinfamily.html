@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,14 +9,9 @@
     <body>
         <div id="wrapper">
             <div id="main">
-                <h1 id="registration_heading">開始一個溫暖的家</h1>
-                <form id="registration_form" action="/save_registration" method="post">
-                    <fieldset class="registration_fieldset">
-                        <legend>家庭資料</legend>
-                        <label>家庭名稱：</label><br>
-                        <input type="text" name="familyname">
-                    </fieldset>
-                    <fieldset class="registration_fieldset">
+                <h1 id="joining_heading">請求加入{{ familyname }}</h1>
+                <form id="joining_form" action="/save_joining/{{ familyname }}" method="post">
+                    <fieldset class="joining_fieldset">
                         <legend>個人檔案</legend>
                         <label>顯示名稱：（盡可能方便家人辨認）</label><br>
                         <input type="text" name="nickname"><br>
@@ -27,18 +23,13 @@
                         <input type="radio" name="gender" value="1">男
                         <label>    </label><input type="radio" name="gender" value="2" />女
                     </fieldset>
-                    <fieldset class="registration_fieldset">
+                    <fieldset class="joining_fieldset">
                         <legend>動態</legend>
                         <label>目前動態：</label><input type="text" name="status" placeholder="ex: 在看小說">
                     </fieldset>
-                    <input id="registration_submit" type="submit" value="確定">
+                    <input id="joining_submit" type="submit" value="確定">
                 </form>
-            </div>
-            <div id="footer">
-                <p>&copy;<a href="http://triple-c.github.com/" target="_blank">triple c</a>. All rights reserved.</p><img src="http://code.google.com/appengine/images/appengine-noborder-120x30.gif" 
-                alt="Google 應用服務引擎技術提供" />
             </div>
         </div>
     </body>
 </html>
-
