@@ -91,15 +91,18 @@ class MainPage(webapp.RequestHandler):
                 template_values = {
                     'user': user,
                     'url': url,
-                    'url_linktext': url_linktext
+                    'url_linktext': url_linktext,
+                    'has_family': has_family
                 }
                 path = os.path.join(os.path.dirname(__file__), 'demo_index.html')
         else:
             url = users.create_login_url(self.request.uri)
             url_linktext = 'Log in'
+            has_family = None
             template_values = {
                 'url': url,
-                'url_linktext': url_linktext
+                'url_linktext': url_linktext,
+                'has_family': has_family
             }
             path = os.path.join(os.path.dirname(__file__), 'demo_index.html')
 

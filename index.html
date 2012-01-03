@@ -93,7 +93,7 @@
             <div id="main">
                 <ul id="nav">
                     <li><a href="{{ url }}">{{ url_linktext }}</a></li>
-                    {% ifequal url_linktext 'Log in' %}
+                    {% ifequal has_family None %}
                         <li><a href="register">Create family now!</a></li>
                     {% endifequal %}
                     <li><a href="/">Home</a></li>
@@ -121,7 +121,7 @@
                     {% for entry in member_status %}
                         <div class="member_status">
                             <span class="nickname">{{ entry.user }}</span><span class="updated_time">@{{ entry.updated_at|date:"H:i:s Y-m-d" }}</span><br>
-                            <img class="profile_image" src="profilepicture/wanwan.jpg">
+                            <img class="profile_image" src="/images/default_avatar.png">
                             <div {% ifequal entry.user_id user_id %}id="selfstatus"{% endifequal %} class="status">
                                 {{ entry.content|escape }}
                             </div>
