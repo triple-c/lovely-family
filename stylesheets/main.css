@@ -40,6 +40,26 @@ div#footer {
     font-size: 16px;
 }
 
+div#cover_all {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    min-width: 800px;
+    width: 100%;
+    min-height: 700px;
+    height: 100%;
+    background: rgba(136, 136, 136, 0.5);
+}
+
+div#about_div {
+    margin: 160px auto 0;
+    padding: 16px;
+    width: 640px;
+    height: 320px;
+    background: white;
+}
+
 
 
 
