@@ -33,13 +33,23 @@
                     $('textarea.msg').val(msg);
                     $('span.msg').show();
                 });
+
+                $('span#about').click(function()
+                {
+                    $('div#cover_all').show();
+                });
+
+                $('div#cover_all').click(function()
+                {
+                    $(this).hide();
+                });
             });
         </script>
     </head>
     <body>
         <div id="wrapper">
             <div id="header">
-                <img id="banner_img" src="background/banner.png">
+                <img id="banner_img" src="http://i.minus.com/jbnOelc7SEoAbN.png">
             </div>
             <div id="main">
                 <ul id="nav">
@@ -66,42 +76,42 @@
                     <h2><span><a href="/familywall/{{ family.name }}">conan</a></span></h2>
                     <div class="member_status">
                         <span class="nickname">{{ entry.user }}</span><span class="updated_time">@{{ entry.updated_at|date:"H:i:s Y-m-d" }}</span><br>
-                        <img class="profile_image" src="profilepicture/wanwan.jpg">
+                        <img class="profile_image" src="images/default_avatar.png">
                         <div {% ifequal entry.user_id user_id %}id="selfstatus"{% endifequal %} class="status">
                             {{ entry.content|escape }}
                         </div>
                     </div>
                     <div class="member_status">
                         <span class="nickname">{{ entry.user }}</span><span class="updated_time">@{{ entry.updated_at|date:"H:i:s Y-m-d" }}</span><br>
-                        <img class="profile_image" src="profilepicture/wanwan.jpg">
+                        <img class="profile_image" src="images/default_avatar.png">
                         <div {% ifequal entry.user_id user_id %}id="selfstatus"{% endifequal %} class="status">
                             {{ entry.content|escape }}
                         </div>
                     </div>
                     <div class="member_status">
                         <span class="nickname">{{ entry.user }}</span><span class="updated_time">@{{ entry.updated_at|date:"H:i:s Y-m-d" }}</span><br>
-                        <img class="profile_image" src="profilepicture/wanwan.jpg">
+                        <img class="profile_image" src="images/default_avatar.png">
                         <div {% ifequal entry.user_id user_id %}id="selfstatus"{% endifequal %} class="status">
                             {{ entry.content|escape }}
                         </div>
                     </div>
                     <div class="member_status">
                         <span class="nickname">{{ entry.user }}</span><span class="updated_time">@{{ entry.updated_at|date:"H:i:s Y-m-d" }}</span><br>
-                        <img class="profile_image" src="profilepicture/wanwan.jpg">
+                        <img class="profile_image" src="images/default_avatar.png">
                         <div {% ifequal entry.user_id user_id %}id="selfstatus"{% endifequal %} class="status">
                             {{ entry.content|escape }}
                         </div>
                     </div>
                     <div class="member_status">
                         <span class="nickname">{{ entry.user }}</span><span class="updated_time">@{{ entry.updated_at|date:"H:i:s Y-m-d" }}</span><br>
-                        <img class="profile_image" src="profilepicture/wanwan.jpg">
+                        <img class="profile_image" src="images/default_avatar.png">
                         <div {% ifequal entry.user_id user_id %}id="selfstatus"{% endifequal %} class="status">
                             {{ entry.content|escape }}
                         </div>
                     </div>
                     <div class="member_status">
                         <span class="nickname">{{ entry.user }}</span><span class="updated_time">@{{ entry.updated_at|date:"H:i:s Y-m-d" }}</span><br>
-                        <img class="profile_image" src="profilepicture/wanwan.jpg">
+                        <img class="profile_image" src="images/default_avatar.png">
                         <div {% ifequal entry.user_id user_id %}id="selfstatus"{% endifequal %} class="status">
                             {{ entry.content|escape }}
                         </div>

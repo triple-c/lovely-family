@@ -45,6 +45,7 @@ div#cover_all {
     top: 0;
     left: 0;
     z-index: 4;
+    display: none;
     min-width: 800px;
     width: 100%;
     min-height: 700px;
@@ -56,8 +57,17 @@ div#about_div {
     margin: 160px auto 0;
     padding: 16px;
     width: 640px;
-    height: 320px;
+    min-height: 320px;
     background: white;
+}
+
+span#about {
+    margin-left: 16px;
+    cursor: pointer;
+}
+
+span#about:hover {
+    text-decoration: underline;
 }
 
 

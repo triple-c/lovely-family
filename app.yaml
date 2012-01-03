@@ -6,12 +6,9 @@ api_version: 1
 handlers:
 - url: /stylesheets
   static_dir: stylesheets
-  
-- url: /background
-  static_dir: background
 
-- url: /profilepicture
-  static_dir: profilepicture
+- url: /images
+  static_dir: images
 
 - url: /.*
   script: tripleapp.py

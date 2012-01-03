@@ -72,6 +72,16 @@
                         $('span.msg').show();
                     }
                 });
+
+                $('span#about').click(function()
+                {
+                    $('div#cover_all').show();
+                });
+
+                $('div#cover_all').click(function()
+                {
+                    $(this).hide();
+                });
             });
         </script>
     </head>
