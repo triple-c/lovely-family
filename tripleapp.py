@@ -123,9 +123,9 @@ class FamilyWall(webapp.RequestHandler):
     def get(self, slash, familyname):
         if familyname is not None and familyname != '':
             if users.get_current_user():
+                user = users.get_current_user()
                 has_family = Connection.gql('WHERE user = :user_id', user_id = user.user_id()).get()
                 if has_family is not None:
-                    user = users.get_current_user().nickname()
                     url = users.create_logout_url(self.request.uri)
                     url_linktext = 'Log out'
                     family = Family.gql('WHERE name = :familyname', familyname = familyname).get()
@@ -190,7 +190,7 @@ class JoinFamily(webapp.RequestHandler):
                 template_values = {
                     'user': user,
                     'familyname': familyname,
-                    'member': member
+                    'members': members
                 }
 
                 path = os.path.join(os.path.dirname(__file__), 'joinfamily.html')
